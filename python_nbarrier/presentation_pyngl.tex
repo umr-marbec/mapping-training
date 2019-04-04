@@ -1,0 +1,222 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[lofdepth,lotdepth]{subfig}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    %basicstyle=\footnotesize,
+    basicstyle=\scriptsize\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=bash
+}
+ 
+\lstset{style=mystyle}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Spatial representation with Python]{Spatial representation with the Python Basemap and PyNGL libraries} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Nicolas Barrier} % Your name
+\institute[UMR MARBEC] % 
+{
+UMR MARBEC \\ % Your institution for the title page
+\medskip
+\textit{nicolas.barrier@ird.fr} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+    \vspace{-1em}
+\begin{center}
+\includegraphics[height=2cm]{logo-marbec.png}
+\hspace{1em}
+\includegraphics[height=2cm]{logo_ird.png}
+\end{center}
+\end{frame}
+
+\section{Basemap library}
+\begin{frame}[fragile]
+\frametitle{Description}
+    The Basemap library is the mapping extension of the standard graphic library
+    \footnotesize{
+\begin{block}{Pros}
+    \begin{itemize}
+        \item{It is now quite easy to install by using \href{https://www.anaconda.com/}{Anaconda}}
+        \item{Very simple to use}
+        \item{Multiple map backgrounds can be used (from TIFF image for instance)}
+        \item{Comes with usefull tool (distance calculations, etc.)}
+    \end{itemize}
+\end{block}
+\begin{alertblock}{Cons}
+    \begin{itemize}
+        \item{Rendering is not always perfect}
+        \item{No Masked Lambert Conformal projection}
+        \item{Need to switch from geographical to map coordinates}
+        \item{Need to navigate between Matplotlib and Basemap methods/functions}
+    \end{itemize}
+\end{alertblock}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example}
+\lstinputlisting[language=Python,basicstyle=\tiny\ttfamily, ]{progs/map_contour_quiver.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example}
+    \begin{center}
+        \includegraphics[scale=0.8]{progs/contour_quiver.pdf}
+    \end{center}
+\end{frame}
+
+
+\section{PyNGL library}
+
+\begin{frame}[fragile]
+\frametitle{Description}
+    The NCAR Graphic library is a very powerfull library for graphics, especially mapping. It is available in Python through the \textcolor{blue}{\href{https://www.pyngl.ucar.edu/}{PyNGL}} library.
+    \footnotesize{
+\begin{block}{Pros}
+    \begin{itemize}
+        \item{It is now quite easy to install by using \href{https://www.anaconda.com/}{Anaconda}}
+        \item{Very nice rendering}
+        \item{The drawing of velocity fields is very easy (curlyvectors, etc.)}
+        \item{Many examples are provided in the \href{https://www.pyngl.ucar.edu/Examples/gallery.shtml}{gallery}}
+    \end{itemize}
+\end{block}
+\begin{alertblock}{Cons}
+    \begin{itemize}
+        \item{Not compatible with the default Python graphic library \href{https://matplotlib.org/}{Matplotlib}}
+        \item{Heavy code! To use only for paper plots (not for working material)}
+        \item{Only 256 colors can be used}
+    \end{itemize}
+\end{alertblock}
+}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simple map}
+\lstinputlisting[language=Python,basicstyle=\tiny\ttfamily, ]{progs/simple_map_pyngl.py}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simple map}
+    \begin{center}
+    \includegraphics[scale=0.3]{progs/conmasklc.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{More complicated example}
+    366 lines of code later (cf. \verb+plot_currents_pyngl.py+)...
+    \begin{center}
+    \includegraphics[scale=0.3]{progs/oscar_traj_mean.png}
+    \end{center}
+\end{frame}
+
+\end{document}
