@@ -17,10 +17,13 @@ m.fillcontinents(color='gray', lake_color='gray')
 cs = m.contour(x, y, z, colors='k', linewidths=0.5)
 plt.clabel(cs, fmt='%.2f')
 
-# drawing quiver plot
-# use of pyplot function !!!
+# drawing quiver plot USING PYPLOT FUNCTION!
 q = plt.quiver(x, y, u, v, z, cmap=plt.cm.get_cmap('hsv'), scale=1000, zorder=1000)
 q.set_clim(0, 50)
+
+# drawing colorbar using basemap function
 cb = m.colorbar(q)
+
+# adding quiver key USING PYPLOT FUNCTION! 
 keys = plt.quiverkey(q, -131, 21, 70, 
         'Wind speed\n(50 m/s)', coordinates='data')
