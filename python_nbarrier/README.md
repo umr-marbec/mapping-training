@@ -1,4 +1,4 @@
-# Spatial representation with Python]
+# Spatial representation with Python
 
 In this presentation, I describe two Python librairies dedicated to data representation on maps:
 
